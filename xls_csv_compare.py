@@ -32,7 +32,7 @@ def id_filter(row):
 filtered_keep = list(filter(id_filter, keep))
 filtered_keep = [[cell.value for cell in row] for row in filtered_keep]
 print(f"Liczba rzędów z wartością 'Zrealizowana': {len(keep)}", f"Liczba rzędów, która różni się od pliku csv: {len(filtered_keep)}", sep="\n")
-inn = input("Press ENTER to continue")
+inn = input("Press ENTER to continue\n")
 result_xls_path = P(fxls_path.stem + "-results" + fxls_path.suffix)
 result_xls = openpyxl.Workbook()
 result_sheet = result_xls.active
