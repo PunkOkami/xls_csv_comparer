@@ -4,7 +4,7 @@ from pathlib import Path as P
 
 
 print("Made by PunkOkami\nPublished under GNU GPLv3 licence\nGitHub repo: https://github.com/PunkOkami/xls_csv_comparer",
-	  "Version: 1.0", sep="\n")
+	  "Version: 1.0", "email adress: okami.github@gmail.com", sep="\n")
 
 fcsv_path = list(P(P.cwd()).rglob("Raport*.csv"))[0]
 fcsv = open(fcsv_path, newline="")
@@ -45,3 +45,4 @@ result_xls.save(result_xls_path)
 # Published under GNU GPLv3 licence
 # GitHub repo: https://github.com/PunkOkami/xls_csv_comparer
 # Version: 1.0
+# e-mail adress: okami.github@gmail.com
