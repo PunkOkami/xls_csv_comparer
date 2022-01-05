@@ -58,7 +58,7 @@ result_sheet.append(names)
 for row in reg_rows:
 	result_sheet.append(row)
 result_xls.save(result_xls_path)
-inn = input("Naciśnij Enter by zakończyć")
+inn = input("Naciśnij Enter by zakończyć program")
 
 # Made by PunkOkami
 # Published under GNU GPLv3 licence
