@@ -1,10 +1,10 @@
 # XLS-CSV Comparer
 
 Program został stworzony, by porównać plik CSV wygenerowany przez 
-XXX i plik XLSX wygenerowny przez XXX. Głównym zadaniem programu jest znalezienie oraz 
-dodanie do wynikowego pliku XLSX tych wierszy pochodzących z analizowanego pliku
-XLSX, które nie znajdują się w pliku CSV. Program jest sworzony, by uznawać plik XLSX
-jako szablon. Nie ma możliwości zamiany plików bez zmiany całego kodu.
+gabinet.gov.pl i plik XLSX wygenerowny przez eRejestracja. Głównym zadaniem programu 
+jest znalezienie oraz dodanie do wynikowego pliku XLSX tych wierszy pochodzących z 
+analizowanego pliku XLSX, które nie znajdują się w pliku CSV. Program jest sworzony, 
+by uznawać plik XLSX jako szablon. Nie ma możliwości zamiany plików bez zmiany całego kodu.
 
 ## Nota
 W czasie pracy tego programu żadne dane wrażliwe nie opuszczają folderu, w którym się
@@ -22,14 +22,14 @@ zawiera coś innego niż pustą wartość.
 ## Manual
 Program nie wymaga podawania nazw żadnego z plików. Wyszuka je w katalogu, gdzie się
 znajdują pliki CSV i XLSX. Może sięgnąć nawet do katalogów poniżej, ale nigdy powyżej swojej
-lokalizacji. Weźmie tylko pliki, których nazwa zgadza się z formatem stosowanym przez XXX. 
-Zalecam jednak, by program znajdował się w folderze, gdzie jest tylko po jednym pliku
-CSV oraz XLSX. Gdy będzie ich więcej, program może nie wybrać właściwych plików. Na pewno
-nie zinterpretuje on pliku wynikowego XLSX jako wejściowego, więc nie trzeba usuwać go między 
-sesjami korzystania z programu. Program znajduje różnice między danymi w plikach wejściowych 
-oraz zapisuje je w nowym pliku typu XLSX, którego nazwa jest zmodyfikowaną nazwą startowego 
-pliku XLSX. Program dodaje "-results" na koniec nazwy. Program bez problemu nadpisze istniejący 
-wynikowy plik XLSX, jeśli nazwa się zgadza, ale w żadnym momencie użytkowania programu 
+lokalizacji. Weźmie tylko pliki, których nazwa zgadza się z formatem stosowanymi przez eRejestracja
+oraz gabinet.gov.pl. Zalecam jednak, by program znajdował się w folderze, gdzie jest tylko po 
+jednym pliku CSV oraz XLSX. Gdy będzie ich więcej, program może nie wybrać właściwych plików. 
+Na pewno nie zinterpretuje on pliku wynikowego XLSX jako wejściowego, więc nie trzeba usuwać 
+go między sesjami korzystania z programu. Program znajduje różnice między danymi w plikach 
+wejściowych oraz zapisuje je w nowym pliku typu XLSX, którego nazwa jest zmodyfikowaną nazwą 
+startowego pliku XLSX. Program dodaje "-results" na koniec nazwy. Program bez problemu nadpisze 
+istniejący wynikowy plik XLSX, jeśli nazwa się zgadza, ale w żadnym momencie użytkowania programu 
 pliki dostarczone przez użytkownika nie zostaną zmodyfkowane.
 
 ### Instrukcja postępowania:
