@@ -1,36 +1,35 @@
 # XLS-CSV Comparer
 
-Program został stworzony by porównać plik CSV wygenerowany przez 
-XXX i XLSX wygenerowny przez XXX. Głównym zadaniem programu jest znalezienie oraz 
+Program został stworzony, by porównać plik CSV wygenerowany przez 
+XXX i plik XLSX wygenerowny przez XXX. Głównym zadaniem programu jest znalezienie oraz 
 dodanie do wynikowego pliku XLSX tych wierszy pochodzących z analizowanego pliku
-XLSX, które nie znajdują się w pliku CSV. Program jest sworzony by uznawać plik XLSX
-jako szablon i nie da się zmienić kolejności bez zmiany całego kodu.
+XLSX, które nie znajdują się w pliku CSV. Program jest sworzony, by uznawać plik XLSX
+jako szablon. Nie ma możliwości zamiany plików bez zmiany całego kodu.
 
 ## Nota
-W czasie pracy tego programu żadne dane wrażliwe nie opuszczają foderu w którym się
+W czasie pracy tego programu żadne dane wrażliwe nie opuszczają folderu, w którym się
 znajdują pliki wejściowe. W czasie pracy nad tym programem korzystałem jedynie z 
 danych losowych oraz sztucznie stworzonych plików.
 
 ## Use case
-Porgram został swtorzony z jedenego prostego powodu i do jednego celu, co powoduje jego
-wyjątkowe wyspecjalizowanie. Mój bliski szczepi i sprawdzał jak oba pliki wyglądają
-oraz jak mają się do siebie. Odkrył, że ilość rzędów w jednym pliku nie równa się
-liczbie z drugiego pliku. Dokładnie rzecz ujmując wiecej było ich w pliku CSV. Drugą 
-rzeczą, która program robi to znajduje te rzędy w pliku csv gdzie koluman "reg_aktywna"
+Porgram został stworzony z jedenego prostego powodu i w jednym celu, co powoduje jego
+wyjątkowe wyspecjalizowanie. Mój bliski krewny wykonuje szczepienia i sprawdzał, jak oba pliki wyglądają
+oraz czy ich zawartość się pokrywa. Odkrył, że ilość rzędów w jednym pliku nie równa się
+liczbie rzędów z drugiego pliku. Dokładnie rzecz ujmując wiecej było ich w pliku CSV. Drugą 
+rzeczą, którą program robi jest znajdywanie tych rzędów w pliku csv, gdzie kolumna "reg_aktywna"
 zawiera coś innego niż pustą wartość. 
 
 ## Manual
-Oba pliki ustawione są jako domyślne pliki i program będzie je wyszukiwał w katalogu,
-w którym się znajduje oraz w katalogach poniżej. Zalecam, by program oraz oba pliki
-znajdowały się w osobnym katalogu, ponieważ mimo, że program ominie pliki nie będące
-tymi wygenrowanymi przez XXX, to nie jestem w stanie zapewnić by wziął odpowiedni
-jednocześnie ściągając z użytkownika problem wpisywania trudnych nazw plików lub ich
-sprawdzania. Plik sam znajdzie odpowiedni plik CSV i XLSX jeśli w tym katalogu (oraz
-poniżej) znajduje się tylko jeden plik XLSX oraz jeden plik CSV z odpowiednią nazwą. 
-Jak na razie program jedyne co robi, to znajduje różnice oraz zapisuje je w nowym 
-pliku typu XLSX, którego nazwa jest zmodyfikowaną nazwą startowego pliku XLSX, 
-program dodaje "-results" na koniec nazwy. Program bez problemu nadpisze istniejący 
-wynikowy plik XLSX, jeśli nazwa się zgadza, ale w żadnym momencie wykonywania programu 
+Program nie wymaga podawania nazw żadnego z plików. Wyszuka je w katalogu, gdzie się
+znajdują pliki CSV i XLSX. Może sięgnąć nawet do katalogów poniżej, ale nigdy powyżej swojej
+lokalizacji. Weźmie tylko pliki, których nazwa zgadza się z formatem stosowanym przez XXX. 
+Zalecam jednak, by program znajdował się w folderze, gdzie jest tylko po jednym pliku
+CSV oraz XLSX. Gdy będzie ich więcej, program może nie wybrać właściwych plików. Na pewno
+nie zinterpretuje on pliku wynikowego XLSX jako wejściowego, więc nie trzeba usuwać go między 
+sesjami korzystania z programu. Program znajduje różnice między danymi w plikach wejściowych 
+oraz zapisuje je w nowym pliku typu XLSX, którego nazwa jest zmodyfikowaną nazwą startowego 
+pliku XLSX. Program dodaje "-results" na koniec nazwy. Program bez problemu nadpisze istniejący 
+wynikowy plik XLSX, jeśli nazwa się zgadza, ale w żadnym momencie użytkowania programu 
 pliki dostarczone przez użytkownika nie zostaną zmodyfkowane.
 
 ### Instrukcja postępowania:
@@ -40,7 +39,7 @@ pliki dostarczone przez użytkownika nie zostaną zmodyfkowane.
 4. Postepuj zgodnie z instrukcjami w konsoli
 5. Po zakończeniu pracy programu w folderze powinien pojawić się nowy plik XLSX
 
-W razie problemów lub błędów programu moje dane kontaktowe znajdują sie w komukatach
+W razie problemów lub błędów programu moje dane kontaktowe znajdują sie w komunikatach
 programu oraz na końcu tego pliku.
 
 Made by PunkOkami
