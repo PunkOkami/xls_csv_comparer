@@ -33,11 +33,20 @@ istniejący wynikowy plik XLSX, jeśli nazwa się zgadza, ale w żadnym momencie
 pliki dostarczone przez użytkownika nie zostaną zmodyfkowane.
 
 ### Instrukcja postępowania:
-1. Wytwórz plik CSV oraz XLSX
-2. Umieść oba pliki w katologu z plikiem wykonywalnym
-3. Uruchom program
-4. Postepuj zgodnie z instrukcjami w konsoli
-5. Po zakończeniu pracy programu w folderze powinien pojawić się nowy plik XLSX
+1. Rozpakuj pobrany plik "xls-csv-comparer.zip" - kliknij prawym klawiszem myszki na ikonę  i wybierz opcję "wyodrębnij 
+wszystkie". W otwartym oknie możesz zmienić lokalizację miejsca, gdzie ma znaleźć się program po rozpakowaniu. Program 
+nie będzie prawidłowo pracował, jeśli chcesz go uruchomić klikając w oknie eksploratora pliku spakowanego!
+2. Po rozpakowaniu powstanie katalog o nazwie "xls-csv-comparer". W tym katalogu znajduje się podkatalog 
+"Work_space", w któym jest właściwy program.
+3. Wytwórz pliki CSV oraz XLSX i zapisz je w podkatalogu "Work_space".
+4. Uruchom program xls_csv_compare.exe. 
+5. Postepuj zgodnie z instrukcjami widocznymi  konsoli programu.
+6. Po zakończeniu pracy programu w folderze powinien pojawić się nowy plik XLSX z dodatkiem "results" w 
+nazwie. Plik należy otworzyć i przeanalizować. W górnej części tabeli są pozycje widoczne w rejestracji, 
+a nie widoczne w gabinecie, poniżej mogą być dodatkowo pozycje, które w raporcie z e-gabinetu miały pewien
+komentarz, też warto je sprawdzić, czy zostały prawidłowo wprowadzone w gabinet.gov.pl.
+7. Gdyby był jakiekolwiek problemy z uruchomieniem programu, spróbuj uruchomić go w trybie administratora:
+prawy klawisz myszki na ikonie programu i opcja "uruchom jako administrator".
 
 W razie problemów lub błędów programu moje dane kontaktowe znajdują sie w komunikatach
 programu oraz na końcu tego pliku.
