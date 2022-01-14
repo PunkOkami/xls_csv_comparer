@@ -1,4 +1,5 @@
 import csv
+import sys
 import openpyxl
 from pathlib import Path as P
 
@@ -13,10 +14,20 @@ def id_filter(row):
 
 print("Made by PunkOkami", "Published under GNU GPLv3 licence",
 		"GitHub repo: https://github.com/PunkOkami/xls_csv_comparer",
-		"Version: 1.0", "email adress: okami.github@gmail.com", "\n", sep="\n")
+		"Version: 1.1", "email adress: okami.github@gmail.com", "\n", sep="\n")
+
+# Program sprawdza czy instenieje przymajmniej jeden plik csv i xlsx
+fcsv_list = list(P(P.cwd()).rglob("Raport*.csv"))
+if fcsv_list == []:
+	inn = input("Program nie znalazł żadnego pliku CSV, naciśnij ENTER by zamknąć program")
+	sys.exit()
+fxls_list = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))
+if fxls_list == []:
+	inn = input("Program nie znalazł żadnego pliku XLS, naciśnij ENTER by zamknąć program")
+	sys.exit()
 
 # Program znajduje plik csv, otwiera go oraz wyciąga wszystkie rzędy
-fcsv_path = list(P(P.cwd()).rglob("Raport*.csv"))[0]
+fcsv_path = fcsv_list[0]
 fcsv = open(fcsv_path, newline="")
 rcsv = csv.reader(fcsv, delimiter=";")
 rows = [row for row in rcsv]
@@ -31,7 +42,7 @@ ids = set([row[id_col] for row in rows])
 reg_rows = [(row[id_col], row[reg_col], row[pj_col]) for row in rows if row[reg_col] != ""]
 
 # Finds xlsx file end opens proper sheet
-fxls_path = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))[0]
+fxls_path = fxls_list[0]
 fxls = openpyxl.load_workbook(fxls_path)
 sheet = fxls["Terminy i wizyty"]
 # Bierze wszystkie rzędy z arkusza, w krórych kolumna "Status wizyty" ma wartość "Zrealizowana",
@@ -63,5 +74,5 @@ inn = input("Naciśnij Enter by zakończyć program")
 # Made by PunkOkami
 # Published under GNU GPLv3 licence
 # GitHub repo: https://github.com/PunkOkami/xls_csv_comparer
-# Version: 1.0
+# Version: 1.1
 # e-mail adress: okami.github@gmail.com
