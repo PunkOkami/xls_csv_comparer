@@ -38,9 +38,9 @@ if len(fcsv_list) != 1:
 			print("Pliki CSV znajdujące się w katalogu")
 			for file in fcsv_list:
 				mtime = file.stat().st_mtime
-				print(f"{fcsv_list.index(file)+1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
-			file = int(input("Wpisz numer pliku CSV jaki program ma wybrać\n>>>"))
-			fcsv_path = fcsv_list[file-1]
+				print(f"{fcsv_list.index(file) + 1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
+			fnum = int(input("Wpisz numer pliku CSV jaki program ma wybrać\n>>>"))
+			fcsv_path = fcsv_list[fnum - 1]
 		else:
 			inn = input("Opcja niepoprawna, naciśnij ENTER by zamknąć program")
 			sys.exit()
@@ -54,7 +54,29 @@ if len(fxls_list) != 1:
 		inn = input("Program nie znalazł żadnego pliku XLS, naciśnij ENTER by zamknąć program")
 		sys.exit()
 	else:
-		sys.exit("Many xlsx files")
+		print("Program znalazł więcej niż jeden plik XLS. Co program ma zrobić? Wpisz numer opcji, którą wybierasz",
+			  "1.Zamknij program, sam uporządkuję zawartość katalogu", "2.Weź najnowszy plik do analizy",
+			  "3.Pokaż mi listę plików do wyboru", sep="\n")
+		option = input(">>>")
+		if int(option) == 1:
+			sys.exit()
+		elif int(option) == 2:
+			mtimes = {file.stat().st_mtime:file for file in fxls_list}
+			newest = max(mtimes.keys())
+			fxls_path = mtimes[newest]
+		elif int(option) == 3:
+			print("Pliki CSV znajdujące się w katalogu")
+			for file in fxls_list:
+				mtime = file.stat().st_mtime
+				print(f"{fxls_list.index(file) + 1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
+			fnum = int(input("Wpisz numer pliku CSV jaki program ma wybrać\n>>>"))
+			fxls_path = fxls_list[fnum - 1]
+		else:
+			inn = input("Opcja niepoprawna, naciśnij ENTER by zamknąć program")
+			sys.exit()
+else:
+	fxls_path = fxls_list[0]
+print(f"Plik XLS wzięty do analizy to {fxls_path.name}")
 
 
 fcsv = open(fcsv_path, newline="")
@@ -71,7 +93,6 @@ ids = set([row[id_col] for row in rows])
 reg_rows = [(row[id_col], row[reg_col], row[pj_col]) for row in rows if row[reg_col] != ""]
 
 # Finds xlsx file end opens proper sheet
-fxls_path = fxls_list[0]
 fxls = openpyxl.load_workbook(fxls_path)
 sheet = fxls["Terminy i wizyty"]
 # Bierze wszystkie rzędy z arkusza, w krórych kolumna "Status wizyty" ma wartość "Zrealizowana",
