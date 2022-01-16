@@ -1,5 +1,6 @@
-import csv
+import datetime
 import sys
+import csv
 import openpyxl
 from pathlib import Path as P
 
@@ -16,7 +17,7 @@ print("Made by PunkOkami", "Published under GNU GPLv3 licence",
 		"GitHub repo: https://github.com/PunkOkami/xls_csv_comparer",
 		"Version: 1.1", "email adress: okami.github@gmail.com", "\n", sep="\n")
 
-# ToDo: add testing for more files than 1
+
 fcsv_list = list(P(P.cwd()).rglob("Raport*.csv"))
 if len(fcsv_list) != 1:
 	if len(fcsv_list) == 0:
@@ -27,14 +28,35 @@ if len(fcsv_list) != 1:
 			  "1.Zamknij program, sam uporządkuję zawartość katalogu", "2.Weź najnowszy plik do analizy",
 			  "3.Pokaż mi listę plików do wyboru", sep="\n")
 		option = input(">>>")
+		if int(option) == 1:
+			sys.exit()
+		elif int(option) == 2:
+			mtimes = {file.stat().st_mtime:file for file in fcsv_list}
+			newest = max(mtimes.keys())
+			fcsv_path = mtimes[newest]
+		elif int(option) == 3:
+			print("Pliki CSV znajdujące się w katalogu")
+			for file in fcsv_list:
+				mtime = file.stat().st_mtime
+				print(f"{fcsv_list.index(file)+1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
+			file = int(input("Wpisz numer pliku CSV jaki program ma wybrać\n>>>"))
+			fcsv_path = fcsv_list[file-1]
+		else:
+			inn = input("Opcja niepoprawna, naciśnij ENTER by zamknąć program")
+			sys.exit()
+else:
+	fcsv_path = fcsv_list[0]
+print(f"Plik CSV wzięty do analizy to {fcsv_path.name}")
+
 fxls_list = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))
 if len(fxls_list) != 1:
 	if len(fxls_list) == 0:
 		inn = input("Program nie znalazł żadnego pliku XLS, naciśnij ENTER by zamknąć program")
 		sys.exit()
+	else:
+		sys.exit("Many xlsx files")
 
-# Program znajduje plik csv, otwiera go oraz wyciąga wszystkie rzędy
-fcsv_path = fcsv_list[0]
+
 fcsv = open(fcsv_path, newline="")
 rcsv = csv.reader(fcsv, delimiter=";")
 rows = [row for row in rcsv]
