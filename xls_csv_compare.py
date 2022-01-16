@@ -16,15 +16,17 @@ print("Made by PunkOkami", "Published under GNU GPLv3 licence",
 		"GitHub repo: https://github.com/PunkOkami/xls_csv_comparer",
 		"Version: 1.1", "email adress: okami.github@gmail.com", "\n", sep="\n")
 
-# Program sprawdza czy instenieje przymajmniej jeden plik csv i xlsx
+# ToDo: add testing for more files than 1
 fcsv_list = list(P(P.cwd()).rglob("Raport*.csv"))
-if fcsv_list == []:
-	inn = input("Program nie znalazł żadnego pliku CSV, naciśnij ENTER by zamknąć program")
-	sys.exit()
+if len(fcsv_list) != 1:
+	if len(fcsv_list) == 0:
+		inn = input("Program nie znalazł żadnego pliku CSV, naciśnij ENTER by zamknąć program")
+		sys.exit()
 fxls_list = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))
-if fxls_list == []:
-	inn = input("Program nie znalazł żadnego pliku XLS, naciśnij ENTER by zamknąć program")
-	sys.exit()
+if len(fxls_list) != 1:
+	if len(fxls_list) == 0:
+		inn = input("Program nie znalazł żadnego pliku XLS, naciśnij ENTER by zamknąć program")
+		sys.exit()
 
 # Program znajduje plik csv, otwiera go oraz wyciąga wszystkie rzędy
 fcsv_path = fcsv_list[0]
