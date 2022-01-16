@@ -16,6 +16,7 @@ def id_filter(row):
 print("Made by PunkOkami", "Published under GNU GPLv3 licence",
 		"Kod żródłowy: https://github.com/PunkOkami/xls_csv_comparer",
 		"Version: 1.2", "email adress: okami.github@gmail.com", "\n", sep="\n")
+print("---------------------------------------------------")
 
 # Program znajduje wszystkie pliki CSV po czym sprawdza ich ilość i zależnie od ilości albo kontynuje bez problemów,
 # powidamia o braku plików albo pyta się co zrobić - gdy napotka kilka
@@ -47,7 +48,9 @@ if len(fcsv_list) != 1:
 			sys.exit()
 else:
 	fcsv_path = fcsv_list[0]
+print("----------------------------------------------")
 print(f"Plik CSV wzięty do analizy to {fcsv_path.name}")
+print("----------------------------------------------")
 
 # Program wykonuje dokładnie ten sam zestaw testów i zapytań co przy pliku CSV, tylko, że dla plików XLS
 fxls_list = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))
@@ -78,7 +81,9 @@ if len(fxls_list) != 1:
 			sys.exit()
 else:
 	fxls_path = fxls_list[0]
+print("----------------------------------------------")
 print(f"Plik XLS wzięty do analizy to {fxls_path.name}")
+print("----------------------------------------------")
 
 # Program otwiera wybrany plik csv i wyciąga z niego dane
 fcsv = open(fcsv_path, newline="")
@@ -121,6 +126,7 @@ result_sheet.append(names)
 for row in reg_rows:
 	result_sheet.append(row)
 result_xls.save(result_xls_path)
+print("----------------------------------------------")
 inn = input("Naciśnij Enter by zakończyć program")
 
 # Made by PunkOkami
