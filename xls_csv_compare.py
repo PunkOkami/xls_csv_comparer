@@ -14,10 +14,11 @@ def id_filter(row):
 
 
 print("Made by PunkOkami", "Published under GNU GPLv3 licence",
-		"GitHub repo: https://github.com/PunkOkami/xls_csv_comparer",
-		"Version: 1.1", "email adress: okami.github@gmail.com", "\n", sep="\n")
+		"Kod żródłowy: https://github.com/PunkOkami/xls_csv_comparer",
+		"Version: 1.2", "email adress: okami.github@gmail.com", "\n", sep="\n")
 
-
+# Program znajduje wszystkie pliki CSV po czym sprawdza ich ilość i zależnie od ilości albo kontynuje bez problemów,
+# powidamia o braku plików albo pyta się co zrobić - gdy napotka kilka
 fcsv_list = list(P(P.cwd()).rglob("Raport*.csv"))
 if len(fcsv_list) != 1:
 	if len(fcsv_list) == 0:
@@ -48,6 +49,7 @@ else:
 	fcsv_path = fcsv_list[0]
 print(f"Plik CSV wzięty do analizy to {fcsv_path.name}")
 
+# Program wykonuje dokładnie ten sam zestaw testów i zapytań co przy pliku CSV, tylko, że dla plików XLS
 fxls_list = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))
 if len(fxls_list) != 1:
 	if len(fxls_list) == 0:
@@ -78,7 +80,7 @@ else:
 	fxls_path = fxls_list[0]
 print(f"Plik XLS wzięty do analizy to {fxls_path.name}")
 
-
+# Program otwiera wybrany plik csv i wyciąga z niego dane
 fcsv = open(fcsv_path, newline="")
 rcsv = csv.reader(fcsv, delimiter=";")
 rows = [row for row in rcsv]
@@ -92,7 +94,7 @@ pj_col = name_row.index(names[2])
 ids = set([row[id_col] for row in rows])
 reg_rows = [(row[id_col], row[reg_col], row[pj_col]) for row in rows if row[reg_col] != ""]
 
-# Finds xlsx file end opens proper sheet
+# Otwiera odpowiedni arkusz w pliku XLS
 fxls = openpyxl.load_workbook(fxls_path)
 sheet = fxls["Terminy i wizyty"]
 # Bierze wszystkie rzędy z arkusza, w krórych kolumna "Status wizyty" ma wartość "Zrealizowana",
@@ -123,6 +125,6 @@ inn = input("Naciśnij Enter by zakończyć program")
 
 # Made by PunkOkami
 # Published under GNU GPLv3 licence
-# GitHub repo: https://github.com/PunkOkami/xls_csv_comparer
-# Version: 1.1
+# Kod żródłowy: https://github.com/PunkOkami/xls_csv_comparer
+# Version: 1.2
 # e-mail adress: okami.github@gmail.com
