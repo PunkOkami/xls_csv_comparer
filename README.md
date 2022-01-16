@@ -23,14 +23,15 @@ zawiera coś innego niż pustą wartość.
 Program nie wymaga podawania nazw żadnego z plików. Wyszuka je w katalogu, gdzie się
 znajdują pliki CSV i XLSX. Może sięgnąć nawet do katalogów poniżej, ale nigdy powyżej swojej
 lokalizacji. Weźmie tylko pliki, których nazwa zgadza się z formatem stosowanymi przez eRejestracja
-oraz gabinet.gov.pl. Zalecam jednak, by program znajdował się w folderze, gdzie jest tylko po 
-jednym pliku CSV oraz XLSX. Gdy będzie ich więcej, program może nie wybrać właściwych plików. 
-Na pewno nie zinterpretuje on pliku wynikowego XLSX jako wejściowego, więc nie trzeba usuwać 
-go między sesjami korzystania z programu. Program znajduje różnice między danymi w plikach 
-wejściowych oraz zapisuje je w nowym pliku typu XLSX, którego nazwa jest zmodyfikowaną nazwą 
-startowego pliku XLSX. Program dodaje "-results" na koniec nazwy. Program bez problemu nadpisze 
-istniejący wynikowy plik XLSX, jeśli nazwa się zgadza, ale w żadnym momencie użytkowania programu 
-pliki dostarczone przez użytkownika nie zostaną zmodyfkowane.
+oraz gabinet.gov.pl. Od wersji 1.2 program jest w stanie poradzić sobie z wiecej niż jednym plikiem
+XLS i CSV w katalogu (w takim wypadku użytkownik może wybrać plik do analizy, wybrać najnowszy lub 
+opuścić program) a nawet powiadomi, gdy nie znajdzie żadnego pliku. Na pewno nie zinterpretuje on 
+pliku wynikowego XLSX jako wejściowego, więc nie trzeba usuwać go między sesjami korzystania z 
+programu. Program znajduje różnice między danymi w plikach wejściowych oraz zapisuje je w nowym 
+pliku typu XLSX, którego nazwa jest zmodyfikowaną nazwą startowego pliku XLSX. Program dodaje 
+"-results" na koniec nazwy. Program bez problemu nadpisze istniejący wynikowy plik XLSX, jeśli 
+nazwa się zgadza, ale w żadnym momencie użytkowania programu pliki dostarczone przez użytkownika 
+nie zostaną zmodyfkowane.
 
 ### Instrukcja postępowania:
 1. Rozpakuj pobrany plik "xls-csv-comparer.zip" - kliknij prawym klawiszem myszki na ikonę  i wybierz opcję "wyodrębnij 
@@ -57,6 +58,8 @@ Published under GNU GPLv3 licence
 
 [GitHub repo](https://github.com/PunkOkami/xls_csv_comparer)
 
-Version: 1.1
+[Link do pobrania pliku exe](https://github.com/PunkOkami/xls_csv_comparer/releases)
+
+Version: 1.2
 
 e-mail adress: okami.github@gmail.com
