@@ -22,6 +22,11 @@ if len(fcsv_list) != 1:
 	if len(fcsv_list) == 0:
 		inn = input("Program nie znalazł żadnego pliku CSV, naciśnij ENTER by zamknąć program")
 		sys.exit()
+	else:
+		print("Program znalazł więcej niż jeden plik CSV. Co program ma zrobić? Wpisz numer opcji, którą wybierasz",
+			  "1.Zamknij program, sam uporządkuję zawartość katalogu", "2.Weź najnowszy plik do analizy",
+			  "3.Pokaż mi listę plików do wyboru", sep="\n")
+		option = input(">>>")
 fxls_list = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))
 if len(fxls_list) != 1:
 	if len(fxls_list) == 0:
