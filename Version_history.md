@@ -7,5 +7,8 @@ Stabilna wersja programu. Porównuje pliki CSV i XLSX i tworzy plik wynikowy. Ni
 ## Version 1.1
 Dodano funkcję sprawdzenia czy folder zawiera przynajmniej po jednym pliku CSV i XLS
 
-Version 1.2
+## Version 1.2
 Program poradzi sobie z kilkoma pilikami obu rodzajów. Dodano trochę poprawek kosmetycznych
+
+### Version 1.2.1
+Znaleziono i naprawono błąd, gdy w pliku CSV pojawi się nietypowy znak tekstowy

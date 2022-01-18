@@ -86,7 +86,7 @@ print(f"Plik XLS wzięty do analizy to {fxls_path.name}")
 print("----------------------------------------------")
 
 # Program otwiera wybrany plik csv i wyciąga z niego dane
-fcsv = open(fcsv_path, newline="")
+fcsv = open(fcsv_path, newline="", encoding="utf-8")
 rcsv = csv.reader(fcsv, delimiter=";")
 rows = [row for row in rcsv]
 # Wyciągany jest pierwszy rząd, następnie pobierane są 3 wartości indeksów z 3 różnych kolumn, by potem stworzyć listę tupli
