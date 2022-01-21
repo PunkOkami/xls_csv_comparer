@@ -74,7 +74,7 @@ if len(fxls_list) != 1:
 			for file in fxls_list:
 				mtime = file.stat().st_mtime
 				print(f"{fxls_list.index(file) + 1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
-			fnum = int(input("Wpisz numer pliku CSV jaki program ma wybrać\n>>>"))
+			fnum = int(input("Wpisz numer pliku XLS jaki program ma wybrać\n>>>"))
 			fxls_path = fxls_list[fnum - 1]
 		else:
 			inn = input("Opcja niepoprawna, naciśnij ENTER by zamknąć program")
