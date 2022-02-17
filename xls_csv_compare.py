@@ -5,19 +5,63 @@ import openpyxl
 from pathlib import Path as P
 
 
-# Funkcja wykorzystana do przefiltrowania rzędów z pliku xlsx
-def id_filter(row):
-	if row[col_num].value in ids:
-		return False
-	else:
-		return True
+class Comparare():
+	
+	def __init__(self):
+		print("Made by PunkOkami", "Published under GNU GPLv3 licence",
+			  "Kod żródłowy: https://github.com/PunkOkami/xls_csv_comparer",
+			  "Version: 1.2", "email adress: okami.github@gmail.com", "\n", sep="\n")
+		print("---------------------------------------------------")
+		self.csv_path = self.searcher("CSV", "Raport*.csv")
+		self.xls_path = self.searcher("XLS", "eRej*[!-results].xlsx")
+		
+	def id_filter(self, row):
+		if row[col_num].value in ids:
+			return False
+		else:
+			return True
+	
+	def searcher(self, filetype: str, name_regex: str) -> P:
+		matching_files_list = list(P(P.cwd()).rglob(name_regex))
+		if len(matching_files_list) != 1:
+			if len(matching_files_list) == 0:
+				inn = input(f"Program nie znalazł żadnego pliku {filetype}, naciśnij ENTER by zamknąć program")
+				sys.exit()
+			else:
+				status = True
+				while status:
+					print(
+						f"Program znalazł więcej niż jeden plik {filetype}. Co program ma zrobić? Wpisz numer opcji, którą wybierasz",
+						"1.Zamknij program, sam uporządkuję zawartość katalogu", "2.Weź najnowszy plik do analizy",
+						"3.Pokaż mi listę plików do wyboru", sep="\n")
+					option = input(">>>")
+					if int(option) == 1:
+						sys.exit()
+					elif int(option) == 2:
+						mtimes = {file.stat().st_mtime: file for file in matching_files_list}
+						newest = max(mtimes.keys())
+						file_path = mtimes[newest]
+						status = False
+					elif int(option) == 3:
+						print(f"Pliki {filetype} znajdujące się w katalogu")
+						for file in fcsv_list:
+							mtime = file.stat().st_mtime
+							print(f"{fcsv_list.index(file) + 1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
+						fnum = int(input(f"Wpisz numer pliku {filetype} jaki program ma wybrać\n>>>"))
+						file_path = fcsv_list[fnum - 1]
+						status = False
+					else:
+						inn = input("Opcja niepoprawna, spróbuj ponownie")
+		else:
+			file_path = matching_files_list[0]
+		print("----------------------------------------------")
+		print(f"Plik {filetype} wzięty do analizy to {file_path.name}")
+		print("----------------------------------------------")
+		return file_path
 
-
-print("Made by PunkOkami", "Published under GNU GPLv3 licence",
-		"Kod żródłowy: https://github.com/PunkOkami/xls_csv_comparer",
-		"Version: 1.2", "email adress: okami.github@gmail.com", "\n", sep="\n")
+		
 print("---------------------------------------------------")
-
+# ToDo: Put this into method into class
 # Program znajduje wszystkie pliki CSV po czym sprawdza ich ilość i zależnie od ilości albo kontynuje bez problemów,
 # powidamia o braku plików albo pyta się co zrobić - gdy napotka kilka
 fcsv_list = list(P(P.cwd()).rglob("Raport*.csv"))
@@ -52,6 +96,7 @@ print("----------------------------------------------")
 print(f"Plik CSV wzięty do analizy to {fcsv_path.name}")
 print("----------------------------------------------")
 
+# ToDo: Here into method from TD1
 # Program wykonuje dokładnie ten sam zestaw testów i zapytań co przy pliku CSV, tylko, że dla plików XLS
 fxls_list = list(P(P.cwd()).rglob("eRej*[!-results].xlsx"))
 if len(fxls_list) != 1:
