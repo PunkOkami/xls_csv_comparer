@@ -5,7 +5,14 @@ import openpyxl
 from pathlib import Path as P
 
 
-class Comparare():
+def id_filter(self, row):
+	if row[col_num].value in ids:
+		return False
+	else:
+		return True
+
+
+class Compararer():
 	
 	def __init__(self):
 		print("Made by PunkOkami", "Published under GNU GPLv3 licence",
@@ -14,6 +21,9 @@ class Comparare():
 		print("---------------------------------------------------")
 		self.csv_path = self.searcher("CSV", "Raport*.csv")
 		self.xls_path = self.searcher("XLS", "eRej*[!-results].xlsx")
+		self.csv_data = self.csv_analise()
+		self.xls_data = self.xls_analise()
+		
 		
 	def id_filter(self, row):
 		if row[col_num].value in ids:
@@ -25,7 +35,7 @@ class Comparare():
 		matching_files_list = list(P(P.cwd()).rglob(name_regex))
 		if len(matching_files_list) != 1:
 			if len(matching_files_list) == 0:
-				inn = input(f"Program nie znalazł żadnego pliku {filetype}, naciśnij ENTER by zamknąć program")
+				inn = input(f"Program nie znalazł żadnego pliku {filetype}, naciśnij ENTER by zamknąć program\n>>>")
 				sys.exit()
 			else:
 				status = True
@@ -44,21 +54,46 @@ class Comparare():
 						status = False
 					elif int(option) == 3:
 						print(f"Pliki {filetype} znajdujące się w katalogu")
-						for file in fcsv_list:
+						for file in matching_files_list:
 							mtime = file.stat().st_mtime
-							print(f"{fcsv_list.index(file) + 1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
+							print(f"{matching_files_list.index(file) + 1}. {file.name} --- {datetime.datetime.fromtimestamp(mtime)}")
 						fnum = int(input(f"Wpisz numer pliku {filetype} jaki program ma wybrać\n>>>"))
-						file_path = fcsv_list[fnum - 1]
+						file_path = matching_files_list[fnum - 1]
 						status = False
 					else:
-						inn = input("Opcja niepoprawna, spróbuj ponownie")
+						print("Opcja niepoprawna, spróbuj ponownie\n---------------------------------------")
 		else:
 			file_path = matching_files_list[0]
 		print("----------------------------------------------")
 		print(f"Plik {filetype} wzięty do analizy to {file_path.name}")
 		print("----------------------------------------------")
 		return file_path
+	
+	def csv_analise(self):
+		fcsv = open(self.csv_path, newline="", encoding="utf-8")
+		rcsv = csv.reader(fcsv, delimiter=";")
+		rows = [row for row in rcsv]
+		name_row = rows.pop(0)
+		names = ["pacjent_ext", "reg_aktywne", "pj_data_zapisania_baza_danych"]
+		id_col = name_row.index(names[0])
+		reg_col = name_row.index(names[1])
+		pj_col = name_row.index(names[2])
+		ids = set([row[id_col] for row in rows])
+		reg_rows = [(row[id_col], row[reg_col], row[pj_col]) for row in rows if row[reg_col] != ""]
+		return {"rows": rows, "ids": ids, "reg_rows": reg_rows}
+	
+	def xls_analise(self):
+		fxls = openpyxl.load_workbook(self.xls_path)
+		sheet = fxls["Terminy i wizyty"]
+		rows = list(sheet.iter_rows())
+		keep = [row for row in rows if row[3].value == "Zrealizowana"]
+		id_row = [cell.value for cell in rows[0]]
+		col_num = id_row.index("Wartość identyfikatora pacjenta")
+		ids = set([row[col_num] for row in keep])
+		return {"keep": keep, "ids":ids}
+		
 
+App = Compararer()
 		
 print("---------------------------------------------------")
 # ToDo: Put this into method into class
