@@ -12,7 +12,7 @@ def id_filter(self, row):
 		return True
 
 
-class Compararer():
+class Comparer():
 	
 	def __init__(self):
 		print("Made by PunkOkami", "Published under GNU GPLv3 licence",
@@ -93,7 +93,7 @@ class Compararer():
 		return {"keep": keep, "ids":ids}
 		
 
-App = Compararer()
+App = Comparer()
 		
 print("---------------------------------------------------")
 # ToDo: Put this into method into class
