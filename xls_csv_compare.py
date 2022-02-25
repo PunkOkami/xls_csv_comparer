@@ -5,7 +5,7 @@ import openpyxl
 from pathlib import Path as P
 
 
-def id_filter(self, row):
+def id_filter(row):
 	if row[col_num].value in ids:
 		return False
 	else:
@@ -13,24 +13,24 @@ def id_filter(self, row):
 
 
 class Comparer():
-	
-	def __init__(self):
+	def main(self):
 		print("Made by PunkOkami", "Published under GNU GPLv3 licence",
 			  "Kod żródłowy: https://github.com/PunkOkami/xls_csv_comparer",
 			  "Version: 1.2", "email adress: okami.github@gmail.com", "\n", sep="\n")
 		print("---------------------------------------------------")
-		self.csv_path = self.searcher("CSV", "Raport*.csv")
-		self.xls_path = self.searcher("XLS", "eRej*[!-results].xlsx")
-		self.csv_data = self.csv_analise()
-		self.xls_data = self.xls_analise()
+		csv_path = self.searcher("CSV", "Raport*.csv")
+		xls_path = self.searcher("XLS", "eRej*[!-results].xlsx")
+		csv_data = self.csv_analise(csv_path)
+		xls_data = self.xls_analise(xls_path)
+		csv_filtered = [row for row in csv_data["keep"] if row[0] not in xls_data["ids"]]
+		xls_filtered = [row for row in xls_data["keep"] if row[0] not in csv_data["ids"]]
+		print(len(csv_data["keep"]), len(xls_data["keep"]), sep="-----")
+		reg_rows = [row for row in csv_data["keep"] if row[2] != ""]
+		print(f"Liczba rzędów z wartością 'Zrealizowana': {len(xls_data['keep'])}",
+			  f"Liczba rzędów w pliku xls, która różni się od pliku csv: {len(xls_filtered)}",
+			  f"Liczba rzędów w pliku csv, która różni się od pliku xls: {len(csv_filtered)}",
+			  f"Liczna rzędów z niepustym polem reg: {len(reg_rows)}", sep="\n")
 		
-		
-	def id_filter(self, row):
-		if row[col_num].value in ids:
-			return False
-		else:
-			return True
-	
 	def searcher(self, filetype: str, name_regex: str) -> P:
 		matching_files_list = list(P(P.cwd()).rglob(name_regex))
 		if len(matching_files_list) != 1:
@@ -69,32 +69,37 @@ class Comparer():
 		print("----------------------------------------------")
 		return file_path
 	
-	def csv_analise(self):
-		fcsv = open(self.csv_path, newline="", encoding="utf-8")
-		rcsv = csv.reader(fcsv, delimiter=";")
+	def csv_analise(self, path):
+		fcsv = open(path, newline="", encoding="utf-8")
+		rcsv = csv.reader(fcsv, delimiter=",")
 		rows = [row for row in rcsv]
 		name_row = rows.pop(0)
 		names = ["pacjent_ext", "reg_aktywne", "pj_data_zapisania_baza_danych"]
 		id_col = name_row.index(names[0])
 		reg_col = name_row.index(names[1])
-		pj_col = name_row.index(names[2])
+		time_col = name_row.index(names[2])
 		ids = set([row[id_col] for row in rows])
-		reg_rows = [(row[id_col], row[reg_col], row[pj_col]) for row in rows if row[reg_col] != ""]
-		return {"rows": rows, "ids": ids, "reg_rows": reg_rows}
+		keep = [(row[id_col], row[time_col], row[reg_col]) for row in rows]
+		return {"keep": keep, "ids": ids}
 	
-	def xls_analise(self):
-		fxls = openpyxl.load_workbook(self.xls_path)
+	def xls_analise(self, path):
+		fxls = openpyxl.load_workbook(path)
 		sheet = fxls["Terminy i wizyty"]
-		rows = list(sheet.iter_rows())
+		rows = [list(row) for row in sheet.iter_rows()]
 		keep = [row for row in rows if row[3].value == "Zrealizowana"]
 		id_row = [cell.value for cell in rows[0]]
-		col_num = id_row.index("Wartość identyfikatora pacjenta")
-		ids = set([row[col_num] for row in keep])
+		names = ["Data i godzina rozpoczęcia terminu", "Wartość identyfikatora pacjenta"]
+		time_col = id_row.index(names[0])
+		id_col = id_row.index(names[1])
+		ids = set([row[id_col].value for row in keep])
+		keep = [(row[id_col].value, row[time_col].value) for row in keep]
 		return {"keep": keep, "ids":ids}
 		
 
 App = Comparer()
-		
+App.main()
+
+
 print("---------------------------------------------------")
 # ToDo: Put this into method into class
 # Program znajduje wszystkie pliki CSV po czym sprawdza ich ilość i zależnie od ilości albo kontynuje bez problemów,
@@ -167,11 +172,12 @@ print("----------------------------------------------")
 
 # Program otwiera wybrany plik csv i wyciąga z niego dane
 fcsv = open(fcsv_path, newline="", encoding="utf-8")
-rcsv = csv.reader(fcsv, delimiter=";")
+rcsv = csv.reader(fcsv, delimiter=",")
 rows = [row for row in rcsv]
 # Wyciągany jest pierwszy rząd, następnie pobierane są 3 wartości indeksów z 3 różnych kolumn, by potem stworzyć listę tupli
 # z wartości kolumn z każdego rzędu. Powstaje też zbiór numerów PESEL z pliku csv
 name_row = rows.pop(0)
+print(len(rows))
 names = ["pacjent_ext", "reg_aktywne", "pj_data_zapisania_baza_danych"]
 id_col = name_row.index(names[0])
 reg_col = name_row.index(names[1])
@@ -191,7 +197,7 @@ col_num = id_row.index("Wartość identyfikatora pacjenta")
 filtered_keep = list(filter(id_filter, keep))
 filtered_keep = [[cell.value for cell in row] for row in filtered_keep] # Tworzy listę stringów oraz wyświetla wynik
 print(f"Liczba rzędów z wartością 'Zrealizowana': {len(keep)}",
-		f"Liczba rzędów, która różni się od pliku csv: {len(filtered_keep)}",
+		f"Liczba rzędów w xls, która różni się od pliku csv: {len(filtered_keep)}",
 	  	f"Liczna rzędów z niepustym polem {names[1]}: {len(reg_rows)}", sep="\n")
 # Tworzy nowy plik, wypełnia go rzędami nie będącymi w pliku csv, oraz dodaje te, gdzie komlumna "reg_aktywne" nie
 # jest pusta
