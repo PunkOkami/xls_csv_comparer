@@ -4,14 +4,6 @@ import csv
 import openpyxl
 from pathlib import Path as P
 
-
-def id_filter(row):
-	if row[col_num].value in ids:
-		return False
-	else:
-		return True
-
-
 class Comparer():
 	def main(self):
 		print("Made by PunkOkami", "Published under GNU GPLv3 licence",
