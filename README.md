@@ -3,8 +3,8 @@
 Program został stworzony, by porównać plik CSV wygenerowany przez 
 gabinet.gov.pl i plik XLSX wygenerowny przez eRejestracja. Głównym zadaniem programu 
 jest znalezienie oraz dodanie do wynikowego pliku XLSX tych wierszy pochodzących z 
-analizowanego pliku XLSX, które nie znajdują się w pliku CSV. Program jest sworzony, 
-by uznawać plik XLSX jako szablon. Nie ma możliwości zamiany plików bez zmiany całego kodu.
+analizowanego pliku XLSX, które nie znajdują się w pliku CSV oraz przeprowadzenie tej samej operacji
+z pliku CSV do XLS
 
 ## Nota
 W czasie pracy tego programu żadne dane wrażliwe nie opuszczają folderu, w którym się
@@ -29,7 +29,7 @@ opuścić program) a nawet powiadomi, gdy nie znajdzie żadnego pliku. Na pewno 
 pliku wynikowego XLSX jako wejściowego, więc nie trzeba usuwać go między sesjami korzystania z 
 programu. Program znajduje różnice między danymi w plikach wejściowych oraz zapisuje je w nowym 
 pliku typu XLSX, którego nazwa jest zmodyfikowaną nazwą startowego pliku XLSX. Program dodaje 
-"-results" na koniec nazwy. Program bez problemu nadpisze istniejący wynikowy plik XLSX, jeśli 
+"-wynik" na koniec nazwy. Program bez problemu nadpisze istniejący wynikowy plik XLSX, jeśli 
 nazwa się zgadza, ale w żadnym momencie użytkowania programu pliki dostarczone przez użytkownika 
 nie zostaną zmodyfkowane.
 

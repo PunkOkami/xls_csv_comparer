@@ -12,3 +12,11 @@ Program poradzi sobie z kilkoma pilikami obu rodzajów. Dodano trochę poprawek 
 
 ### Version 1.2.1
 Znaleziono i naprawono błąd, gdy w pliku CSV pojawi się nietypowy znak tekstowy
+
+## Verion 2.0
+Przeniesiono cały kod programu do struktury klasowej, co pozwoliło na oczysczenie z powtarzalności
+i brzydkiego kodu
+Dodano funkcję analizy zgodności plik CSV -> plik XLS
+Poprawiono wyłapywanie błędnych danych w pliku CSV
+Zmieniono plik wynikowy, by był bardziej przejrzysty
+Poprawiono kilka literówek w wyjsciu programu
