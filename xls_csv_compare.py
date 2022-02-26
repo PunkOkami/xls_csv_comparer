@@ -16,7 +16,7 @@ class Comparer():
 	def main(self):
 		print("Made by PunkOkami", "Published under GNU GPLv3 licence",
 			  "Kod żródłowy: https://github.com/PunkOkami/xls_csv_comparer",
-			  "Version: 1.2", "email adress: okami.github@gmail.com", "\n", sep="\n")
+			  "Version: 2.0", "email adress: okami.github@gmail.com", "\n", sep="\n")
 		print("---------------------------------------------------")
 		csv_path = self.searcher("CSV", "Raport*.csv")
 		xls_path = self.searcher("XLS", "eRej*[!-wynik].xlsx")
@@ -119,3 +119,9 @@ class Comparer():
 
 App = Comparer()
 App.main()
+
+# Made by PunkOkami
+# Published under GNU GPLv3 licence
+# Github repo: https://github.com/PunkOkami/xls_csv_comparer
+# Version: 2.0
+# e-mail adress: okami.github@gmail.com

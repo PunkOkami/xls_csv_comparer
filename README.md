@@ -60,6 +60,6 @@ Published under GNU GPLv3 licence
 
 [Link do pobrania pliku exe](https://github.com/PunkOkami/xls_csv_comparer/releases)
 
-Version: 1.2
+Version: 2.0
 
 e-mail adress: okami.github@gmail.com
